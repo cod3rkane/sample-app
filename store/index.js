@@ -1,7 +1,7 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
-import rootReducer, { exampleInitialState } from './reducers';
+import { jobsReducer } from './reducers';
 import rootSaga from './saga';
 
 const bindMiddleware = (middleware) => {
@@ -14,8 +14,9 @@ const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware);
 };
 
-function configureStore(initialState = exampleInitialState) {
+function configureStore(initialState) {
   const sagaMiddleware = createSagaMiddleware();
+  const rootReducer = combineReducers({ jobs: jobsReducer });
   const store = createStore(
     rootReducer,
     initialState,
