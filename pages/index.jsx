@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import Layout from '../components/Layout';
 
-const Home = ({}) => {
+const Home = () => {
   return (
     <Layout>
       <Head>
@@ -13,8 +13,8 @@ const Home = ({}) => {
       </Head>
       Hi
     </Layout>
-  )
-}
+  );
+};
 
 Home.propTypes = {};
 

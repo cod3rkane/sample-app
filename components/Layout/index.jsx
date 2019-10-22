@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 
 const DivLayout = styled.div`
   > main {
@@ -12,7 +11,7 @@ const DivLayout = styled.div`
     color: #fff;
     text-decoration: none;
   }
-`
+`;
 
 export const Layout = ({ children }) => {
   return (
@@ -21,7 +20,7 @@ export const Layout = ({ children }) => {
         {children}
       </main>
     </DivLayout>
-  )
+  );
 };
 
 Layout.propTypes = {
