@@ -1,12 +1,20 @@
-import types from './actionTypes';
+import actionTypes from './actionTypes';
 
-export function jobList(payload) {
+export function jobLoadDataSuccess(payload) {
   return {
-    type: types.JOB_LIST,
+    type: actionTypes.JOB_LOAD_DATA_SUCCESS,
+    payload,
+  };
+}
+
+export function jobFailure(payload) {
+  return {
+    type: actionTypes.JOB_LOAD_DATA_ERROR,
     payload,
   };
 }
 
 export default {
-  jobList,
+  jobLoadDataSuccess,
+  jobFailure,
 };
