@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
+import { IntlProvider } from 'react-intl';
 
 import createStore from '../store';
 
@@ -21,7 +22,14 @@ class MyApp extends App {
       pageProps = await Component.getInitialProps({ ctx });
     }
 
-    return { pageProps };
+    const { req } = ctx;
+    const { locale, messages } = req || window.__NEXT_DATA__.props;
+
+    return {
+      pageProps,
+      locale,
+      messages,
+    };
   }
 
   componentDidMount() {
@@ -33,12 +41,20 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, store } = this.props;
+    const {
+      Component,
+      pageProps,
+      store,
+      locale,
+      messages,
+    } = this.props;
 
     return (
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
+          <IntlProvider locale={locale} messages={messages[locale]}>
+            <Component {...pageProps} />
+          </IntlProvider>
         </ThemeProvider>
       </Provider>
     );

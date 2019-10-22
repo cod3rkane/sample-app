@@ -1,5 +1,5 @@
 import React from 'react';
-import Document from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
@@ -13,9 +13,14 @@ export default class MyDocument extends Document {
       });
 
       const initialProps = await Document.getInitialProps(ctx);
+      const {
+        req: { locale, localeDataScript },
+      } = ctx;
 
       return {
         ...initialProps,
+        locale,
+        localeDataScript,
         styles: (
           <React.Fragment key="styles">
             {initialProps.styles}
@@ -26,5 +31,26 @@ export default class MyDocument extends Document {
     } finally {
       sheet.seal();
     }
+  }
+
+  render() {
+    // Polyfill Intl API for older browsers
+    const polyfill = `https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.${this.props.locale}`;
+
+    return (
+      <Html>
+        <Head />
+        <body>
+          <Main />
+          <script src={polyfill} />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: this.props.localeDataScript
+            }}
+          />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }
