@@ -65,7 +65,7 @@ const Home = ({ jobs }) => {
       </Head>
       <JobSearch onSearch={console.log} />
       <SpanFoundJobs>
-        <FormattedMessage id="joblist.found_jobs" values={{ count: jobs.list.length }} />
+        <FormattedMessage id="joblist.found_jobs" defaultMessage="We've found {count, plural, =0 {no jobs} one {# job} other {# jobs}}" values={{ count: jobs.list.length }} />
       </SpanFoundJobs>
       <DivContent>
         {items}

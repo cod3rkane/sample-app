@@ -10,16 +10,18 @@ const DivWrapper = styled.div`
   }
 `;
 const HeaderBar = styled.header`
-  background-color: #32546d;
+  background-color: #0073b1;
   color: #fff;
   display: flex;
   justify-content: space-between;
   padding: 1.2rem;
 
-  > h3 {
+  > a {
     font-weight: lighter;
     font-style: normal;
     font-family: 'Lato', sans-serif;
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
   }
 
   nav {
@@ -40,16 +42,20 @@ const Layout = ({ children }) => {
   return (
     <DivWrapper id="app">
       <HeaderBar>
-        <h3>JedIn</h3>
+        <Link href="/">
+          <a>
+            JedIn
+          </a>
+        </Link>
         <nav>
-          <Link href="/jobs">
+          <Link href="/">
             <a>
               <FormattedMessage id="navbar.header.jobs" defaultMessage="Jobs" />
             </a>
           </Link>
           <Link href="/about">
             <a>
-              <FormattedMessage id="navbar.header.help" defaultMessage="Help" />
+              <FormattedMessage id="navbar.header.about" defaultMessage="About" />
             </a>
           </Link>
         </nav>
