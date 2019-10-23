@@ -1,44 +1,64 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
+import { FormattedMessage } from 'react-intl';
 
+const DivWrapper = styled.div`
+  main {
+    padding: 1.2rem;
+  }
+`;
 const HeaderBar = styled.header`
-  background-color: #152537;
+  background-color: #32546d;
   color: #fff;
-  padding: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem;
+
+  > h3 {
+    font-weight: 800;
+  }
+
+  nav {
+    a {
+      color: rgba(255, 255, 255, 1);
+      font-weight: lighter;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: lighter;
+      font-style: normal;
+      font-family: 'Lato', sans-serif;
+      margin: 0 1rem;
+    }
+  }
 `;
 
-export const Layout = ({ children }) => {
+const Layout = ({ children }) => {
   return (
-    <div id="app">
+    <DivWrapper id="app">
       <HeaderBar>
         <h3>Jedi Jobs</h3>
+        <nav>
+          <Link href="/jobs">
+            <a>
+              <FormattedMessage id="navbar.header.jobs" defaultMessage="Jobs" />
+            </a>
+          </Link>
+          <Link href="/about">
+            <a>
+              <FormattedMessage id="navbar.header.help" defaultMessage="Help" />
+            </a>
+          </Link>
+        </nav>
       </HeaderBar>
       <main>{children}</main>
-      <style jsx global>{`
-        body {
-          margin: 0;
-          padding: 0;
-          background-color: #f2f2f2;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        p {
-          padding: 0;
-          margin: 0;
-        }
-      `}</style>
-    </div>
+    </DivWrapper>
   );
 };
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

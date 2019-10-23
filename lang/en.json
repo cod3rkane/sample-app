@@ -1,3 +1,8 @@
 {
-  "greeting": "Hello!"
+  "greeting": "Hello!",
+  "navbar.header.jobs": "Jobs",
+  "navbar.header.help": "Help",
+  "jobsearch.title": "Your dream job’s just a search away…",
+  "jobsearch.search.placeholder": "Search Jobs",
+  "jobsearch.search.cta": "Search"
 }

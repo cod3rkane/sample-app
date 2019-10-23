@@ -1,18 +1,17 @@
 import React from 'react';
 import Head from 'next/head';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
 import Layout from '../components/Layout';
+import JobSearch from '../components/JobSearch';
 
 const Home = () => {
   return (
     <Layout>
       <Head>
-        <title>Home</title>
+        <title>Jedi Jobs - Home</title>
       </Head>
-      <FormattedMessage id="greeting" />
+      <JobSearch onSearch={console.log} />
     </Layout>
   );
 };

@@ -47,6 +47,9 @@ const getLocale = (req) => {
   return locale;
 };
 
+// Services
+const JobService = require('./jobs');
+
 app.prepare().then(() => {
   const server = express();
 
@@ -59,11 +62,13 @@ app.prepare().then(() => {
     handle(req, res);
   });
 
+  server.get('/api/jobs', JobService.getList);
+
   server.get('*', async (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
     const locale = getLocale(req);
-    const initialState = { jobs: { list: [1, 2, 3, 4] } };
+    const initialState = { jobs: { list: JobService.jobList } };
 
     console.log({ pathname });
 

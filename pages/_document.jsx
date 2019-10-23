@@ -39,7 +39,10 @@ export default class MyDocument extends Document {
 
     return (
       <Html>
-        <Head />
+        <Head>
+          <link href="/static/global.css" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
+        </Head>
         <body>
           <Main />
           <script src={polyfill} />
