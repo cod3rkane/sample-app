@@ -4,5 +4,10 @@
   "navbar.header.help": "Help",
   "jobsearch.title": "Your dream job’s just a search away…",
   "jobsearch.search.placeholder": "Search Jobs",
-  "jobsearch.search.cta": "Search"
+  "jobsearch.search.cta": "Search",
+  "jobcard.action.info": "More Information",
+  "jobcard.type.full_time": "Full Time",
+  "jobcard.type.part_time": "Part Time",
+  "joblist.found_jobs": "We've found {count, plural, =0 {no jobs} one {# job} other {# jobs}}",
+  "joblist.empty": "Ooh no, there are no results that match your search."
 }

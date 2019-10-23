@@ -17,7 +17,9 @@ const HeaderBar = styled.header`
   padding: 1.2rem;
 
   > h3 {
-    font-weight: 800;
+    font-weight: lighter;
+    font-style: normal;
+    font-family: 'Lato', sans-serif;
   }
 
   nav {
@@ -38,7 +40,7 @@ const Layout = ({ children }) => {
   return (
     <DivWrapper id="app">
       <HeaderBar>
-        <h3>Jedi Jobs</h3>
+        <h3>JedIn</h3>
         <nav>
           <Link href="/jobs">
             <a>
