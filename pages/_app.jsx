@@ -1,5 +1,6 @@
 import App from 'next/app';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
@@ -60,5 +61,10 @@ class MyApp extends App {
     );
   }
 }
+
+MyApp.defaultProps = {
+  messages: {},
+  locale: 'en',
+};
 
 export default withRedux(createStore)(withReduxSaga(MyApp));

@@ -3,8 +3,8 @@ const IntlPolyfill = require('intl');
 Intl.NumberFormat = IntlPolyfill.NumberFormat;
 Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
 
-const { createServer } = require('http');
 const { parse } = require('url');
+const express = require('express');
 const next = require('next');
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -13,6 +13,8 @@ const handle = app.getRequestHandler();
 
 const { readFileSync } = require('fs');
 const accepts = require('accepts');
+
+const port = 3000;
 
 // We need to expose React Intl's locale data on the request for the user's
 // locale. This function will also cache the scripts by lang in memory.
@@ -46,28 +48,36 @@ const getLocale = (req) => {
 };
 
 app.prepare().then(() => {
-  createServer((req, res) => {
-    // Be sure to pass `true` as the second argument to `url.parse`.
-    // This tells it to parse the query portion of the URL.
+  const server = express();
+
+  // give all Nextjs's request to Nextjs before anything else!!!
+  server.get('/_next/*', (req, res) => {
+    handle(req, res);
+  });
+
+  server.get('/static/*', (req, res) => {
+    handle(req, res);
+  });
+
+  server.get('*', async (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
-
-    // give all Nextjs's request to Nextjs before anything else!!!
-    if (pathname.startsWith('/_next/') || pathname.startsWith('/static/')) {
-      return handle(req, res);
-    }
-
     const locale = getLocale(req);
+    const initialState = { jobs: { list: [1, 2, 3, 4] } };
 
     console.log({ pathname });
 
+    req.store = initialState;
     req.locale = locale;
     req.localeDataScript = getLocaleDataScript(locale);
     req.messages = getMessages(['en']);
 
     handle(req, res, parsedUrl);
-  }).listen(3000, (err) => {
+  });
+
+  server.listen(port, (err) => {
     if (err) throw err;
-    console.log('> Ready on http://localhost:3000');
+    console.log(`> Ready on http://localhost:${port}`);
+    console.log(`> Running ${process.env.NODE_ENV} environment`);
   });
 });

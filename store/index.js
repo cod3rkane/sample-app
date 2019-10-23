@@ -14,7 +14,7 @@ const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware);
 };
 
-function configureStore(initialState) {
+const makeStore = (initialState) => {
   const sagaMiddleware = createSagaMiddleware();
   const rootReducer = combineReducers({ jobs: jobsReducer });
   const store = createStore(
@@ -24,6 +24,22 @@ function configureStore(initialState) {
   );
 
   store.sagaTask = sagaMiddleware.run(rootSaga);
+
+  return store;
+};
+
+function configureStore(initialState, { isServer, req }) {
+  let store = {};
+
+  if (isServer) {
+    let state = initialState;
+    if (req) {
+      state = req.store;
+    }
+    store = makeStore(state);
+  } else {
+    store = makeStore(initialState);
+  }
 
   return store;
 }
