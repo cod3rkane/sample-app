@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
+import Link from 'next/link';
 
 import PrimaryButton from '../PrimaryButton';
 
@@ -43,34 +44,39 @@ const truncText = (text = '', max = 100) => {
   return `${substr.substring(0, substr.lastIndexOf(' ')).trimRight()}...`;
 };
 
-const JobCard = ({ title, type, description, onClick }) => {
-  return (
-    <DivCard>
-      <DivHeader>
-        <p>
-          <span>{title}</span>
-        </p>
-        <p>
-          <FormattedMessage tagName="span" id={`jobcard.type.${type}`} defaultMessage="Type" />
-        </p>
-        <p>
-          {truncText(description)}
-        </p>
-      </DivHeader>
-      <div>
-        <PrimaryButton onClick={onClick}>
+const JobCard = ({
+  title,
+  type,
+  description,
+  id,
+}) => (
+  <DivCard>
+    <DivHeader>
+      <p>
+        <span>{title}</span>
+      </p>
+      <p>
+        <FormattedMessage tagName="span" id={`jobcard.type.${type}`} defaultMessage="Type" />
+      </p>
+      <p>
+        {truncText(description)}
+      </p>
+    </DivHeader>
+    <div>
+      <Link href="/job/[id]" as={`/job/${id}`}>
+        <PrimaryButton>
           <FormattedMessage id="jobcard.action.info" defaultMessage="More Information" />
         </PrimaryButton>
-      </div>
-    </DivCard>
-  );
-};
+      </Link>
+    </div>
+  </DivCard>
+);
 
 JobCard.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default JobCard;

@@ -62,9 +62,26 @@ app.prepare().then(() => {
     handle(req, res);
   });
 
+  server.get('/job/:id', (req, res) => {
+    const jobId = req.params.id;
+    const data = JobService.jobList.find((e) => e.id === Number(jobId));
+    const relatedJobs = JobService
+      .jobList
+      .filter((e) => e.employment_type === data.employment_type)
+      .filter((e) => e.id !== Number(jobId))
+      .slice(0, 2);
+    const locale = getLocale(req);
+
+    req.locale = locale;
+    req.localeDataScript = getLocaleDataScript(locale);
+    req.messages = getMessages(['en']);
+
+    return app.render(req, res, '/job', { id: jobId, ...data, relatedJobs });
+  });
+
   server.get('/api/jobs', JobService.getList);
 
-  server.get('*', async (req, res) => {
+  server.all('*', async (req, res) => {
     const parsedUrl = parse(req.url, true);
     const { pathname } = parsedUrl;
     const locale = getLocale(req);

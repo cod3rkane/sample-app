@@ -51,7 +51,7 @@ const Home = ({ jobs }) => {
   const items = jobs.list.map((e) => (
     <JobCard
       key={e.id}
-      onClick={console.log}
+      id={e.id}
       title={e.title}
       type={e.employment_type}
       description={e.description}
