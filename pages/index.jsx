@@ -14,6 +14,16 @@ import { getJobList, jobSearch } from '../store/reducers/jobs/actions';
 const DivContent = styled.div`
   margin-top: 1rem;
 
+  @media (min-width: 1200px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    > div {
+      flex-basis: 45%;
+    }
+  }
+
   > div {
     margin-top: 1rem;
   }

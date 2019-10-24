@@ -7,16 +7,29 @@ import { FormattedMessage } from 'react-intl';
 const DivWrapper = styled.div`
   main {
     padding: 1.2rem;
+
+    @media (min-width: 1200px) {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
   }
 `;
 const HeaderBar = styled.header`
   background-color: #0073b1;
   color: #fff;
-  display: flex;
-  justify-content: space-between;
   padding: 1.2rem;
 
-  > a {
+  > div {
+    display: flex;
+    justify-content: space-between;
+
+    @media (min-width: 1200px) {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  }
+
+  > div > a {
     font-weight: lighter;
     font-style: normal;
     font-family: 'Lato', sans-serif;
@@ -42,23 +55,25 @@ const Layout = ({ children }) => {
   return (
     <DivWrapper id="app">
       <HeaderBar>
-        <Link href="/">
-          <a>
-            JedIn
-          </a>
-        </Link>
-        <nav>
+        <div>
           <Link href="/">
             <a>
-              <FormattedMessage id="navbar.header.jobs" defaultMessage="Jobs" />
+              JedIn
             </a>
           </Link>
-          <Link href="/about">
-            <a>
-              <FormattedMessage id="navbar.header.about" defaultMessage="About" />
-            </a>
-          </Link>
-        </nav>
+          <nav>
+            <Link href="/">
+              <a>
+                <FormattedMessage id="navbar.header.jobs" defaultMessage="Jobs" />
+              </a>
+            </Link>
+            <Link href="/about">
+              <a>
+                <FormattedMessage id="navbar.header.about" defaultMessage="About" />
+              </a>
+            </Link>
+          </nav>
+        </div>
       </HeaderBar>
       <main>{children}</main>
     </DivWrapper>
