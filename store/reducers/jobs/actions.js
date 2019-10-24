@@ -21,6 +21,13 @@ export function jobFailure(payload) {
   };
 }
 
+export function jobSearch(payload) {
+  return {
+    type: actionTypes.JOB_FILTER_SEARCH,
+    payload,
+  };
+}
+
 export default {
   jobLoadDataSuccess,
   jobFailure,

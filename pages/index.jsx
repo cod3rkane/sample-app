@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -8,7 +9,7 @@ import Layout from '../components/Layout';
 import JobSearch from '../components/JobSearch';
 import JobCard from '../components/JobCard';
 import StorePropTypes from '../store/types';
-import { getJobList } from '../store/reducers/jobs/actions';
+import { getJobList, jobSearch } from '../store/reducers/jobs/actions';
 
 const DivContent = styled.div`
   margin-top: 1rem;
@@ -48,7 +49,7 @@ const EmptyList = () => (
   </DivEmtpty>
 );
 
-const Home = ({ jobs }) => {
+const Home = ({ jobs, onSearch }) => {
   const items = jobs.list.map((e) => (
     <JobCard
       key={e.id}
@@ -64,7 +65,7 @@ const Home = ({ jobs }) => {
       <Head>
         <title>JedIn Jobs - Home</title>
       </Head>
-      <JobSearch onSearch={console.log} />
+      <JobSearch onSearch={onSearch} />
       <SpanFoundJobs>
         <FormattedMessage id="joblist.found_jobs" defaultMessage="We've found {count, plural, =0 {no jobs} one {# job} other {# jobs}}" values={{ count: jobs.list.length }} />
       </SpanFoundJobs>
@@ -82,6 +83,7 @@ Home.defaultProps = {
 
 Home.propTypes = {
   jobs: StorePropTypes.JobPropType,
+  onSearch: PropTypes.func.isRequired,
 };
 
 Home.getInitialProps = async ({ req, store }) => {
@@ -91,5 +93,8 @@ Home.getInitialProps = async ({ req, store }) => {
 };
 
 const mapStateToProps = ({ jobs }) => ({ jobs });
+const mapDispatchToProps = (dispatch) => ({
+  onSearch: (text) => dispatch(jobSearch(text)),
+});
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

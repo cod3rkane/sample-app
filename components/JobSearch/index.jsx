@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
@@ -53,14 +53,16 @@ const DivForm = styled.div`
 `;
 
 const JobSearch = ({ onSearch }) => {
+  const [text, setText] = useState('');
+
   return (
     <DivJobSearch>
       <SpanTitle>
         <FormattedMessage id="jobsearch.title" defaultMessage="Your dream job’s just a search away…" />
       </SpanTitle>
       <DivForm>
-        <InputText placeholder="Search Jobs" type="search" name="search_job" id="search_job" />
-        <PrimaryButton onClick={onSearch}>
+        <InputText placeholder="Search Jobs" value={text} onChange={(e) => setText(e.target.value)} type="search" name="search_job" id="search_job" />
+        <PrimaryButton onClick={() => onSearch(text)}>
           <FormattedMessage id="jobsearch.search.cta" defaultMessage="Search" />
         </PrimaryButton>
       </DivForm>

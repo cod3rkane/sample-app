@@ -19,6 +19,33 @@ export const jobsReducer = (state = initialState, action) => {
         error: action.payload,
       };
 
+    case types.JOB_FILTER_SEARCH: {
+      let list = [];
+      let pastList = state.list;
+      if (action.payload.trim() === '' && state.pastList) {
+        list = state.pastList;
+      } else {
+        list = state.list.filter((e) => e.title.startsWith(action.payload));
+
+        if (list.length === 0 && state.pastList) {
+          list = state.pastList.filter((e) => e.title.startsWith(action.payload));
+        } else {
+          list = pastList.filter((e) => e.title.startsWith(action.payload));
+        }
+      }
+
+      if (state.pastList) {
+        pastList = state.pastList;
+      }
+
+      return {
+        ...state,
+        list,
+        pastList,
+      };
+    }
+
+
     default:
       return {
         ...state,

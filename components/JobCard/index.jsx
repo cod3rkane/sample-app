@@ -56,7 +56,7 @@ const JobCard = ({
         <span>{title}</span>
       </p>
       <p>
-        <FormattedMessage tagName="span" id={`jobcard.type.${type}`} defaultMessage="Type" />
+        <FormattedMessage tagName="span" id={`jobcard.type.${type}`} defaultMessage="Full Type" />
       </p>
       <p>
         {truncText(description)}
