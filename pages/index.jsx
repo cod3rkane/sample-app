@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -8,6 +9,7 @@ import Layout from '../components/Layout';
 import JobSearch from '../components/JobSearch';
 import JobCard from '../components/JobCard';
 import StorePropTypes from '../store/types';
+import { getJobList } from '../store/reducers/jobs/actions';
 
 const DivContent = styled.div`
   margin-top: 1rem;
@@ -75,8 +77,18 @@ const Home = ({ jobs }) => {
   );
 };
 
+Home.defaultProps = {
+  jobs: [],
+};
+
 Home.propTypes = {
   jobs: StorePropTypes.JobPropType,
+};
+
+Home.getInitialProps = async ({ req, store }) => {
+  if (!req) {
+    store.dispatch(getJobList());
+  }
 };
 
 const mapStateToProps = ({ jobs }) => ({ jobs });

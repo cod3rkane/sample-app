@@ -1,5 +1,12 @@
 import actionTypes from './actionTypes';
 
+export function getJobList(payload) {
+  return {
+    type: actionTypes.JOB_LOAD_DATA,
+    payload,
+  };
+}
+
 export function jobLoadDataSuccess(payload) {
   return {
     type: actionTypes.JOB_LOAD_DATA_SUCCESS,
@@ -17,4 +24,5 @@ export function jobFailure(payload) {
 export default {
   jobLoadDataSuccess,
   jobFailure,
+  getJobList,
 };

@@ -153,15 +153,15 @@ Job.propTypes = {
   })),
 };
 
-Job.getInitialProps = async ({ ctx }) => {
-  if (ctx) {
+Job.getInitialProps = async ({ query }) => {
+  if (query) {
     const {
       id,
       title,
       description,
       employment_type,
       relatedJobs,
-    } = ctx.query;
+    } = query;
 
     return {
       id,
