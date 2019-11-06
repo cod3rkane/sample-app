@@ -25,3 +25,10 @@ Launches the production build app.
   yarn
   yarn dev
 ```
+
+# The App:
+Are you a Jedi looking for a new job? Come to the JedIn's side!
+
+# Images:
+![Pic1](https://i.imgur.com/gd1O5Jd.png)
+![Pic2](https://i.imgur.com/Rr7QxRA.png)
